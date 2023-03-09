@@ -1,0 +1,63 @@
+@startuml
+left to right direction
+:Læge: as a1
+:Patient: as a2
+:Sekretær: as a3
+
+rectangle EPJ-system {
+(Registrer patient) as (UC1)
+a3->(UC1)
+
+(Se oplysninger om patient) as (UC2)
+a1-->(UC2)
+a2-->(UC2)
+
+(UC1).up.>(UC2) : <<extend>>
+(UC2)-[hidden]>(UC1)
+
+(Henvise patienter) as (UC3)
+a1-->(UC3)
+
+(Udskrive recepter)as (UC4)
+a1-->UC4
+
+(Forny recepter) as UC5
+a3-u->UC5
+
+(UC4)..>UC5 : <<extend>>
+
+(Se laboratoriesvar) as (UC6)
+a1-->(UC6)
+a2-->(UC6)
+a3-u->(UC6)
+
+(Se henvisninger) as (UC7)
+a2-->(UC7)
+a3-u->(UC7)
+
+(UC3).down.>(UC7) : <<extend>>
+
+(Se notater) as UC8
+a3-u->UC8
+
+(Skrive notater) as (UC9)
+a1-->(UC9)
+a2-->(UC9)
+
+(UC9)..>UC8 : <<extend>>
+
+(Opret konsultation) as (UC10)
+a3-u->(UC10)
+
+(Se konsultation) as (UC11)
+a1-->(UC11)
+a2-->(UC11)
+
+(UC10).u.>(UC11) : <<extend>>
+
+(Få notifikation) as UC12
+a2-->UC12
+
+}
+
+@enduml
